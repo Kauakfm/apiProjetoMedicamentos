@@ -56,7 +56,7 @@ namespace WebApiEsperanca.Application.Service
                 new Claim("unidadeCodigo",usuario.unidadeCodigo.ToString())
             };
 
-            var token = new JwtSecurityToken(issuer: issuer, claims: claims, audience: audience, expires: DateTime.Now.AddMinutes(180), signingCredentials: credentials);
+            var token = new JwtSecurityToken(issuer: issuer, claims: claims, audience: audience, expires: DateTime.Now.AddMinutes(100), signingCredentials: credentials);
             var tokenHandler = new JwtSecurityTokenHandler();
             var stringToken = tokenHandler.WriteToken(token);
             return stringToken;

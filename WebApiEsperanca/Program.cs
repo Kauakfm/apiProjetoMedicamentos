@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Net.Sockets;
 using System.Text;
 using WebApiEsperanca.Repository;
 
@@ -31,7 +32,7 @@ builder.Services.AddAuthentication
                 });
 builder.Services.AddAuthorization();
 
-builder.Services.AddDbContext<Context>(x => x.UseSqlServer("Server=DESKTOP-8D92RS3\\SQLEXPRESS;Database=bancoDoseEsperanca;User Id=teste;Password=teste;"));
+builder.Services.AddDbContext<Context>(x => x.UseSqlServer("workstation id = bancoDoseEsperanca.mssql.somee.com; packet size = 4096; user id = kauamartinsvar_SQLLogin_1; pwd = oz2i61ryfm; data source = bancoDoseEsperanca.mssql.somee.com; persist security info=False; initial catalog = bancoDoseEsperanca\r\n;"));
 
 var app = builder.Build();
 

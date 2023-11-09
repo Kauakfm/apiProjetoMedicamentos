@@ -18,7 +18,7 @@ namespace WebApiEsperanca.Application.Service
         }
 
 
-        public CadastroResponse<bool> cadastrar(CadastroRequest request)
+        public GenericResponse<bool> cadastrar(CadastroRequest request)
         {
             try
             {
@@ -47,11 +47,11 @@ namespace WebApiEsperanca.Application.Service
                 };
                 if(_ctx.tabUsuario.Any(x =>x.email == request.email))
                 {
-                    return new CadastroResponse<bool>("Erro este email ja existe.", false);
+                    return new GenericResponse<bool>("Erro este email ja existe.", false);
                 }
                 if(_ctx.tabUsuario.Any(x => x.cpf == request.cpf))
                 {
-                    return new CadastroResponse<bool>("Erro este cpf ja existe.", false);
+                    return new GenericResponse<bool>("Erro este cpf ja existe.", false);
                 }
                 _ctx.tabUsuario.Add(user);
                 _ctx.SaveChanges();
@@ -61,11 +61,11 @@ namespace WebApiEsperanca.Application.Service
                 var htmlTemplate = System.IO.File.ReadAllText(Template);
                 var htmlArrumado = htmlTemplate;
                 emailService.EnviaEmail("Dose de esperança", email , "Realização do cadastro concluído", htmlArrumado);
-                return new CadastroResponse<bool>("Sucesso cadastro realizado com sucesso", true);
+                return new GenericResponse<bool>("Sucesso cadastro realizado com sucesso", true);
             }
             catch (Exception)
             {
-                return new CadastroResponse<bool>("Erro não foi possivel cadastra-lo", false);
+                return new GenericResponse<bool>("Erro não foi possivel cadastra-lo", false);
             }
         }
 
