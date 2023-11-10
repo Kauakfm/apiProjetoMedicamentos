@@ -126,3 +126,5 @@ C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\obj\Debug\net6.0\refi
 C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\obj\Debug\net6.0\WebApiEsperanca.pdb
 C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\obj\Debug\net6.0\WebApiEsperanca.genruntimeconfig.cache
 C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\obj\Debug\net6.0\ref\WebApiEsperanca.dll
+C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\bin\Debug\net6.0\Content\EmailHtml\RedefinirSenha.html
+C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\bin\Debug\net6.0\Content\EmailHtml\Agradecimento.html

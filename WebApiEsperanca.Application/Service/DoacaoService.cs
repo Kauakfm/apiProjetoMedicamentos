@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using WebApiEsperanca.Application.Model;
@@ -20,6 +21,7 @@ namespace WebApiEsperanca.Application.Service
         {
             try
             {
+                EmailService emailService = new EmailService();
                 tabProdutoDoado doacao = new tabProdutoDoado();
                 doacao.usuarioCodigo = codigo;
                 doacao.tipoProdutoCodigo = request.tipoProdutoCodigo;
@@ -31,6 +33,16 @@ namespace WebApiEsperanca.Application.Service
                 doacao.forma = request.forma == 0 ? null : request.forma;
                 _ctx.tabProdutoDoado.Add(doacao);
                 _ctx.SaveChanges();
+
+                var usuario = _ctx.tabUsuario.FirstOrDefault(x => x.codigo == codigo);
+                var email = usuario?.email;
+
+                var Template = $"{System.AppDomain.CurrentDomain.BaseDirectory}/Content/EmailHtml/Agradecimento.html";
+                var htmlTemplate = System.IO.File.ReadAllText(Template);
+                var htmlArrumado = htmlTemplate
+                .Replace("@Nome", usuario.nome);
+                emailService.EnviaEmail("Dose de esperança", email, "Realização da doação conluída", htmlArrumado);
+
                 return new GenericResponse<bool>("doação realizada com sucesso", true);
             }
             catch (Exception)

@@ -17,7 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Content\EmailHtml\Agradecimento.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Content\EmailHtml\Cadastro.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\EmailHtml\RedefinirSenha.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

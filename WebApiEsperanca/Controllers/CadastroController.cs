@@ -30,5 +30,37 @@ namespace WebApiEsperanca.Controllers
                 return BadRequest();
             }
         }
+        [HttpPost]
+        [Route("EnviarEmailDeRedefinirSenha")]
+        public IActionResult EnviarEmailDeRedefinirSenha([FromBody] EmailRequest request)
+        {
+            var cadastroService = new CadastroService(_ctx);
+            var sucesso = cadastroService.EnviarEmailDeRedefinirSenha(request.Email);
+            if (sucesso)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return BadRequest(sucesso);
+            }
+
+        }
+        [HttpPost]
+        [Route("EsqueciSenha/{id}")]
+        public IActionResult RedefinirSenha([FromRoute] string id, [FromBody] RedefinirSenhaRequest request)
+        {
+            var cadastroService = new CadastroService(_ctx);
+            var sucesso = cadastroService.RedefinirSenha(id, request);
+            if (sucesso)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return BadRequest(sucesso);
+            }
+
+        }
     }
 }

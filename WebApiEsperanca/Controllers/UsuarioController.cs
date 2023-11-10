@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Security.Claims;
+using WebApiEsperanca.Application.Model;
 using WebApiEsperanca.Application.Service;
 using WebApiEsperanca.Repository;
 
@@ -19,31 +21,40 @@ namespace WebApiEsperanca.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("obterUser")]
-        public IActionResult ObterUsuario()
-        {
-            if (User.Identity is ClaimsIdentity identity)
-            {
-                var expirationClaim = identity.FindFirst("exp");
-                if (expirationClaim != null)
-                {
-                    var expiration = long.Parse(expirationClaim.Value);
-                    var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-
-                    if (now > expiration)
-                    {
-                        // O token está expirado
-                        return Unauthorized("Token expirado");
-                    }
-                }
-            }
-            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
-            var codigo = identidade.FindFirst("usuarioCodigo").Value;
-            if (codigo == null)
+        [Route("obterUser/{id}")]
+        public IActionResult ObterUsuario(int id)
+        {            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
+            var codigo = identidade.FindFirst("tipo").Value;
+            if (codigo != "1")
                 return Unauthorized();
-
             var usuarioService = new UsuarioService(_ctx);
-            return Ok(usuarioService.ObterUsuario(Convert.ToInt32(codigo)));
+            return Ok(usuarioService.ObterUsuario(Convert.ToInt32(id)));
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("obterUsuarios")]
+        public IActionResult ObterUsuarios()
+        {
+            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
+            var status = identidade.FindFirst("tipo").Value;
+            if(status != "1")
+                return Unauthorized();
+            var usuarioService = new UsuarioService(_ctx);
+            return Ok(usuarioService.ObterUsuarios());
+
+        }
+        [HttpPut]
+        [Authorize]
+        [Route("atualizar/{id}")]
+        public IActionResult AtualizarUsuario([FromBody] UsuarioRequest request ,int id)
+        {
+            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
+            var tipo = identidade.FindFirst("tipo").Value;
+            if(tipo != "1")
+                return Unauthorized();  
+            var usuarioService = new UsuarioService(_ctx);
+            return Ok(usuarioService.atualizarUsuario(request, Convert.ToInt32(id)));
         }
     }
 }

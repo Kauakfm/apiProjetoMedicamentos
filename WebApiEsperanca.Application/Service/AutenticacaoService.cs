@@ -27,6 +27,10 @@ namespace WebApiEsperanca.Application.Service
             {
                 return null;
             }
+            if(usuario.tipoUsuarioCodigo == 0)
+            {
+                return null;
+            }
             DateTime ultimoAcesso = usuario.ultimoAcesso ?? DateTime.Now;
             usuario.ultimoAcesso = DateTime.Now;
             _ctx.tabUsuario.Update(usuario);
