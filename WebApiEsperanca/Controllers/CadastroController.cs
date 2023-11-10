@@ -21,13 +21,13 @@ namespace WebApiEsperanca.Controllers
             var cadastroService = new CadastroService(_ctx);
             var sucesso = cadastroService.cadastrar(request);
 
-            if (sucesso.response == true)
+            if (sucesso == null)
             {
-                return Ok(sucesso);
+                return BadRequest(sucesso);
             }
             else
             {
-                return BadRequest();
+                return Ok(sucesso);
             }
         }
         [HttpPost]

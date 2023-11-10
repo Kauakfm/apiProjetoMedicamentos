@@ -1,4 +1,6 @@
+C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\obj\Release\net6.0\PubTmp\Out\Content\EmailHtml\Agradecimento.html
 C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\obj\Release\net6.0\PubTmp\Out\Content\EmailHtml\Cadastro.html
+C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\obj\Release\net6.0\PubTmp\Out\Content\EmailHtml\RedefinirSenha.html
 C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\obj\Release\net6.0\PubTmp\Out\WebApiEsperanca.exe
 C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
 C:\Users\Kaua\Documents\WebApiMedicamentos\WebApiEsperanca\obj\Release\net6.0\PubTmp\Out\appsettings.json
