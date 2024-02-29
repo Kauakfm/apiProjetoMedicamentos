@@ -25,6 +25,8 @@ namespace WebApiEsperanca.Repository
         public DbSet<tabFormaMedicamento> tabFormaMedicamento { get; set; }
 
         public DbSet<tabStatus> tabStatus { get; set; }
+        public DbSet<tabMensagens> tabMensagens { get; set; }
+
 
 
 
@@ -40,6 +42,7 @@ namespace WebApiEsperanca.Repository
             modelBuilder.Entity<tabDosagem>().ToTable("tabDosagem");
             modelBuilder.Entity<tabFormaMedicamento>().ToTable("tabFormaMedicamento");
             modelBuilder.Entity<tabStatus>().ToTable("tabStatus");
+            modelBuilder.Entity<tabMensagens>().ToTable("tabMensagens");
         }
     }
 }

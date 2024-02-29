@@ -74,6 +74,10 @@ namespace WebApiEsperanca.Application.Service
             _ctx.SaveChanges();
             return true;
         }
+        public List<TabUsuario> ListarUsuario()
+        {
+            return _ctx.tabUsuario.ToList();
+        }
 
     }
 }
