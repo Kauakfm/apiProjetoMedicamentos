@@ -60,19 +60,26 @@ namespace WebApiEsperanca.Application.Service
                 throw;
             }
         }
-        public bool atualizarUsuario(UsuarioRequest request, int id)
+        public GenericResponse<bool> atualizarUsuario(UsuarioRequest request, int id)
         {
-            var usuario = _ctx.tabUsuario.FirstOrDefault(x  =>x .codigo == id);
-            usuario.nome = request.nome;
-            usuario.email = request.email;
-            usuario.senha = request.senha;
-            usuario.telefone = request.telefone;
-            usuario.cpf = request.cpf;
-            usuario.generoCodigo = request.generoCodigo;
-            usuario.tipoUsuarioCodigo = request.tipoUsuarioCodigo;
-            _ctx.tabUsuario.Update(usuario);
-            _ctx.SaveChanges();
-            return true;
+            try
+            {
+                var usuario = _ctx.tabUsuario.FirstOrDefault(x => x.codigo == id);
+                usuario.nome = request.nome;
+                usuario.email = request.email;
+                usuario.senha = request.senha;
+                usuario.telefone = request.telefone;
+                usuario.cpf = request.cpf;
+                usuario.generoCodigo = request.generoCodigo;
+                usuario.tipoUsuarioCodigo = request.tipoUsuarioCodigo;
+                _ctx.tabUsuario.Update(usuario);
+                _ctx.SaveChanges();
+                return new GenericResponse<bool>("Usuario atualizado com sucesso", true);
+            }
+            catch (Exception)
+            {
+                return new GenericResponse<bool>("Deu algum problema", false);
+            }
         }
 
     }
