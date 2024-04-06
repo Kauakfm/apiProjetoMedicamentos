@@ -19,13 +19,13 @@ namespace WebApiEsperanca.Repository
         public DbSet<tabTipoProduto> tabTipoProduto { get; set; }
         public DbSet<tabProdutoDoado> tabProdutoDoado { get; set; }
         public DbSet<tabAprovacaoProduto> tabAprovacaoProduto { get; set; }
-
         public DbSet<tabDosagem> tabDosagem { get; set; }
-
         public DbSet<tabFormaMedicamento> tabFormaMedicamento { get; set; }
-
         public DbSet<tabStatus> tabStatus { get; set; }
         public DbSet<tabMensagens> tabMensagens { get; set; }
+        public DbSet<tabConversas> tabConversas { get; set; }
+        public DbSet<tabUsuarioJack> tabUsuarioJack { get; set; }
+        public DbSet<tabLogExcecao> tabLogExcecao { get; set; }
 
 
 
@@ -43,6 +43,9 @@ namespace WebApiEsperanca.Repository
             modelBuilder.Entity<tabFormaMedicamento>().ToTable("tabFormaMedicamento");
             modelBuilder.Entity<tabStatus>().ToTable("tabStatus");
             modelBuilder.Entity<tabMensagens>().ToTable("tabMensagens");
+            modelBuilder.Entity<tabConversas>().ToTable("tabConversas");
+            modelBuilder.Entity<tabUsuarioJack>().ToTable("tabUsuarioJack");
+            modelBuilder.Entity<tabLogExcecao>().ToTable("tabLogExcecao");
         }
     }
 }

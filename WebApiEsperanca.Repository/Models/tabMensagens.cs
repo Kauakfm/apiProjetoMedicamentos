@@ -10,15 +10,15 @@ namespace WebApiEsperanca.Repository.Models
     {
         public int id { get; set; }
 
-        public int ConversaId { get; set; }
+        public int conversaCodigo { get; set; }
 
-        public int RemetenteId { get; set; }
+        public int RementeUsuarioCodigo { get; set; }
 
-        public int DestinatarioId { get; set; }
+        public int DestinatarioUsuarioCodigo { get; set; }
 
         public string Conteudo { get; set; }
 
-        public DateTime DataEnvio { get; set; }
+        public DateTime dataEnvio { get; set; }
 
 
     }
