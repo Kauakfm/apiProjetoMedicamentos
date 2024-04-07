@@ -25,7 +25,7 @@ namespace WebApiEsperanca.Application.DaL
         List<T> Incluir(List<T> tables);
         List<T> Incluir(List<T> tables, Context ctx, bool salvar = true);
 
-        List<T> ListarTable();
+        List<T> Listar();
         List<T> Listar(Context ctx);
 
         T[] Pesquisar(Expression<Func<T, bool>> where, params string[] includes);

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -154,9 +155,9 @@ namespace WebApiEsperanca.Application.DaL
         /// Lista todos os Registros da tabela
         /// </summary>
         /// <returns>Retorna os Objetos listados</returns>
-        public List<T> ListarTable()
+        public List<T> Listar()
         {
-            return SuporteDal.ListarTable<T>();
+            return SuporteDal.Listar<T>();
         }
 
         /// <summary>
@@ -166,7 +167,7 @@ namespace WebApiEsperanca.Application.DaL
         /// <returns>Retorna os Objetos listados</returns>
         public List<T> Listar(Context ctx)
         {
-            return SuporteDal.ListarTable<T>(ctx);
+            return SuporteDal.Listar<T>(ctx);
         }
 
         /// <summary>
@@ -261,9 +262,11 @@ namespace WebApiEsperanca.Application.DaL
         /// Cria um novo contexto do Banco de Dados.
         /// </summary>
         /// <returns>Retorna o novo contexto criado</returns>
-        public static Context CriarContexto(Context context = null)
+        public static Context CriarContexto()
         {
-            return context;
+
+            var options = new DbContextOptionsBuilder<Context>().UseSqlServer("workstation id = bancoDoseEsperanca.mssql.somee.com; packet size = 4096; user id = kauamartinsvar_SQLLogin_1; pwd = oz2i61ryfm; data source = bancoDoseEsperanca.mssql.somee.com; persist security info=False; initial catalog = bancoDoseEsperanca\r\n").Options;
+            return new Context(options);
         }
 
         /// <summary>
@@ -467,7 +470,7 @@ namespace WebApiEsperanca.Application.DaL
                 var entityEntry = dbSet.Add(tables[i]);
                 tables[i] = entityEntry.Entity;
             }
-              
+
 
             if (salvar)
                 Salvar(ctx);
@@ -479,9 +482,12 @@ namespace WebApiEsperanca.Application.DaL
         /// Lista todos os Registros da tabela
         /// </summary>
         /// <returns>Retorna os Objetos listados</returns>
-        public static List<T> ListarTable<T>(Context context = null) where T : class
+        public static List<T> Listar<T>() where T : class
         {
-                return Listar<T>(context);
+            using (var ctx = CriarContexto())
+            {
+                return Listar<T>(ctx);
+            }
         }
 
         /// <summary>
@@ -605,7 +611,7 @@ namespace WebApiEsperanca.Application.DaL
         /// <returns>Retorna o Objeto encontrado</returns>
         public static IEnumerable<T> PesquisarSqlCommand<T>(string sql, Context ctx, params object[] parameters) where T : class
         {
-              return ctx.Set<T>().FromSqlRaw(sql, parameters);
+            return ctx.Set<T>().FromSqlRaw(sql, parameters);
         }
 
         /// <summary>

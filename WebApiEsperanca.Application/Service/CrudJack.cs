@@ -21,7 +21,8 @@ namespace WebApiEsperanca.Application.Service
 
         public List<tabUsuarioJack> ObterUsuariosJack()
         {
-            return _ctx.tabUsuarioJack.ToList();
+            //return _ctx.tabUsuarioJack.ToList();
+            return SuporteDal.Listar<tabUsuarioJack>().ToList();
         }
         public tabUsuarioJack ObterUsuarioJack(int id)
         {

@@ -81,14 +81,5 @@ namespace WebApiEsperanca.Application.Service
                 return new GenericResponse<bool>("Deu algum problema", false);
             }
         }
-        public List<TabUsuario> ListarUsuario()
-        {
-            return _ctx.tabUsuario.ToList();
-            }
-            catch (Exception)
-            {
-               return throw;
-            }
-        }
     }
 }
