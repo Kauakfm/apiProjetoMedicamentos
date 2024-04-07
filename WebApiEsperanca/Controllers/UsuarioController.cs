@@ -18,12 +18,12 @@ namespace WebApiEsperanca.Controllers
             _ctx = context;
         }
 
-
         [HttpGet]
         [Authorize]
         [Route("obterUser/{id}")]
         public IActionResult ObterUsuario(int id)
-        {            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
+        {   
+            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
             var codigo = identidade.FindFirst("tipo").Value;
             if (codigo != "1")
                 return Unauthorized();

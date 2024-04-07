@@ -74,13 +74,21 @@ namespace WebApiEsperanca.Application.Service
                 usuario.tipoUsuarioCodigo = request.tipoUsuarioCodigo;
                 _ctx.tabUsuario.Update(usuario);
                 _ctx.SaveChanges();
-                return new GenericResponse<bool>("Usuario atualizado com sucesso", true);
+                 return new GenericResponse<bool>("Usuario atualizado com sucesso", true);
             }
             catch (Exception)
             {
                 return new GenericResponse<bool>("Deu algum problema", false);
             }
         }
-
+        public List<TabUsuario> ListarUsuario()
+        {
+            return _ctx.tabUsuario.ToList();
+            }
+            catch (Exception)
+            {
+               return throw;
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,22 +24,17 @@ namespace WebApiEsperanca.Application.Service
         public LoginResponse GerarTokenporId(LoginRequest request)
         {
             var usuario = _ctx.tabUsuario.FirstOrDefault(x => x.email == request.email && x.senha == request.password);
-            if (usuario == null)
+            if (usuario == null || usuario.tipoUsuarioCodigo == 0)
             {
                 return null;
             }
-            if(usuario.tipoUsuarioCodigo == 0)
-            {
-                return null;
-            }
-            DateTime ultimoAcesso = usuario.ultimoAcesso ?? DateTime.Now;
             usuario.ultimoAcesso = DateTime.Now;
             _ctx.tabUsuario.Update(usuario);
             _ctx.SaveChanges();
                 return new LoginResponse
                 {
                     token = GeraTokenJwt(usuario),
-                    tipo = Convert.ToInt32(usuario.tipoUsuarioCodigo),
+                    tipo = usuario.tipoUsuarioCodigo,
                     codigo = usuario.codigo,
                     nome = usuario.nome,
                     unidade = usuario.unidadeCodigo
