@@ -56,5 +56,35 @@ namespace WebApiEsperanca.Controllers
             var usuarioService = new UsuarioService(_ctx);
             return Ok(usuarioService.atualizarUsuario(request, Convert.ToInt32(id)));
         }
+        [HttpPut]
+        [Authorize]
+        [Route("editarConta")]
+        public IActionResult EditarMinhaConta([FromBody] EditarContaRequest request)
+        {
+            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
+            var usuarioCodigo = identidade.FindFirst("usuarioCodigo").Value;
+            var usuarioService = new UsuarioService(_ctx);
+            return Ok(usuarioService.EditarMinhaConta(request, Convert.ToInt32(usuarioCodigo)));
+        }
+        [HttpGet]
+        [Authorize]
+        [Route("obterMinhaConta")]
+        public IActionResult ObterUsuario()
+        {
+            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
+            var usuarioCodigo = identidade.FindFirst("usuarioCodigo").Value;
+            var usuarioService = new UsuarioService(_ctx);
+            return Ok(usuarioService.ObterUsuario(Convert.ToInt32(usuarioCodigo)));
+        }
+        [HttpPut]
+        [Authorize]
+        [Route("alterarAvatar")]
+        public IActionResult EditarAvatar([FromBody] Avatar request)
+        {
+            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
+            var usuarioCodigo = identidade.FindFirst("usuarioCodigo").Value;
+            var usuarioService = new UsuarioService(_ctx);
+            return Ok(usuarioService.EditarAvatar(request, Convert.ToInt32(usuarioCodigo)));
+        }
     }
 }

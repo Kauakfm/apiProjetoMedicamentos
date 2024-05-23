@@ -37,7 +37,8 @@ namespace WebApiEsperanca.Application.Service
                     tipo = usuario.tipoUsuarioCodigo,
                     codigo = usuario.codigo,
                     nome = usuario.nome,
-                    unidade = usuario.unidadeCodigo
+                    unidade = usuario.unidadeCodigo,
+                    avatar = string.IsNullOrEmpty(usuario.foto) ? "https://api.dicebear.com/8.x/bottts-neutral/svg?seed=Max" : usuario.foto
                 };
         }
         private string GeraTokenJwt(TabUsuario usuario)

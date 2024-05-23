@@ -15,5 +15,7 @@ namespace WebApiEsperanca.Application.Model
         public List<tabProdutoDoado> doacao { get; set; }
 
         public  int qtdItensDoados { get; set; }
+
+        public string avatar { get; set; }
     }
 }

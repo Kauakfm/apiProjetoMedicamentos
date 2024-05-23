@@ -29,7 +29,8 @@ namespace WebApiEsperanca.Application.Service
                     codigo = x.codigo,
                     nome = x.nome,
                     doacao = _ctx.tabProdutoDoado.Where(c => c.usuarioCodigo == x.codigo).ToList(),
-                    qtdItensDoados = _ctx.tabProdutoDoado.Where(c => c.usuarioCodigo == x.codigo).Count()
+                    qtdItensDoados = _ctx.tabProdutoDoado.Where(c => c.usuarioCodigo == x.codigo).Count(),
+                    avatar = string.IsNullOrEmpty(x.foto) ? "https://api.dicebear.com/8.x/bottts-neutral/svg?seed=Max" : x.foto
                 }).ToList();
 
 

@@ -11,11 +11,9 @@ namespace WebApiEsperanca.Application.Model
         public string token { get; set; }
         public int codigo { get; set; }
         public string nome { get; set; }
-
         public int tipo { get; set; }
-
         public int unidade { get; set; }
+        public string avatar { get; set; }
 
-        
     }
 }

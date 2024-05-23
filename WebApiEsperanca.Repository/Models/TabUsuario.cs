@@ -56,5 +56,7 @@ namespace WebApiEsperanca.Repository.Models
 
         public int unidadeCodigo { get; set; }
 
+        public string? foto { get; set; }
+
     }
 }
