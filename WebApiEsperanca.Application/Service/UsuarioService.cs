@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApiEsperanca.Application.DaL;
 using WebApiEsperanca.Application.Model;
 using WebApiEsperanca.Repository;
 using WebApiEsperanca.Repository.Models;
@@ -22,7 +23,7 @@ namespace WebApiEsperanca.Application.Service
         {
             try
             {
-                return  _ctx.tabUsuario.FirstOrDefault(x => x.codigo == codigo);
+                return _ctx.tabUsuario.FirstOrDefault(x => x.codigo == codigo);
             }
             catch (Exception)
             {
@@ -82,5 +83,34 @@ namespace WebApiEsperanca.Application.Service
             }
         }
 
+        public GenericResponse<bool> EditarMinhaConta(EditarContaRequest request, int id)
+        {
+            try
+            {
+                var objUser = SuporteDal.Pesquisar<TabUsuario>(x => x.codigo == id).FirstOrDefault();
+                if (objUser == null)
+                    return new GenericResponse<bool>("Usuario não encontrado", false);
+
+                objUser.nome = string.IsNullOrEmpty(request.nome) ? objUser.nome : request.nome;
+                objUser.email = string.IsNullOrEmpty(request.email) ? objUser.email : request.email;
+                objUser.dataNascimento = request.dataNascimento == null ? objUser.dataNascimento : request.dataNascimento;
+                objUser.telefone = string.IsNullOrEmpty(request.telefone) ? objUser.telefone : request.telefone;
+                SuporteDal.Editar<TabUsuario>(objUser);
+                return new GenericResponse<bool>("Usuário editado com sucesso", true);
+            }
+            catch (Exception)
+            {
+                return new GenericResponse<bool>("Não foi possível editar", false);
+            }
+        }
+        public GenericResponse<bool> EditarAvatar(Avatar request, int id)
+        {
+            var user = SuporteDal.Pesquisar<TabUsuario>(x => x.codigo == id).FirstOrDefault();
+            if (user == null)
+                return new GenericResponse<bool>("Usuario não encontrado", false);
+            user.foto = request.url;
+            SuporteDal.Editar(user);
+            return new GenericResponse<bool>("Avatar editado com sucesso", true);
+        }
     }
 }

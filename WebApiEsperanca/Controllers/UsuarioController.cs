@@ -18,12 +18,12 @@ namespace WebApiEsperanca.Controllers
             _ctx = context;
         }
 
-
         [HttpGet]
         [Authorize]
         [Route("obterUser/{id}")]
         public IActionResult ObterUsuario(int id)
-        {            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
+        {   
+            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
             var codigo = identidade.FindFirst("tipo").Value;
             if (codigo != "1")
                 return Unauthorized();
@@ -55,6 +55,36 @@ namespace WebApiEsperanca.Controllers
                 return Unauthorized();  
             var usuarioService = new UsuarioService(_ctx);
             return Ok(usuarioService.atualizarUsuario(request, Convert.ToInt32(id)));
+        }
+        [HttpPut]
+        [Authorize]
+        [Route("editarConta")]
+        public IActionResult EditarMinhaConta([FromBody] EditarContaRequest request)
+        {
+            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
+            var usuarioCodigo = identidade.FindFirst("usuarioCodigo").Value;
+            var usuarioService = new UsuarioService(_ctx);
+            return Ok(usuarioService.EditarMinhaConta(request, Convert.ToInt32(usuarioCodigo)));
+        }
+        [HttpGet]
+        [Authorize]
+        [Route("obterMinhaConta")]
+        public IActionResult ObterUsuario()
+        {
+            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
+            var usuarioCodigo = identidade.FindFirst("usuarioCodigo").Value;
+            var usuarioService = new UsuarioService(_ctx);
+            return Ok(usuarioService.ObterUsuario(Convert.ToInt32(usuarioCodigo)));
+        }
+        [HttpPut]
+        [Authorize]
+        [Route("alterarAvatar")]
+        public IActionResult EditarAvatar([FromBody] Avatar request)
+        {
+            var identidade = (ClaimsIdentity)HttpContext.User.Identity;
+            var usuarioCodigo = identidade.FindFirst("usuarioCodigo").Value;
+            var usuarioService = new UsuarioService(_ctx);
+            return Ok(usuarioService.EditarAvatar(request, Convert.ToInt32(usuarioCodigo)));
         }
     }
 }

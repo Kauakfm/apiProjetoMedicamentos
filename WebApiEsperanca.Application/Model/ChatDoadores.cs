@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApiEsperanca.Repository.Models;
 
 namespace WebApiEsperanca.Application.Model
 {
-    public class LoginResponse
+    public class ChatDoadores
     {
-        public string token { get; set; }
         public int codigo { get; set; }
         public string nome { get; set; }
-        public int tipo { get; set; }
-        public int unidade { get; set; }
-        public string avatar { get; set; }
 
+        public List<tabProdutoDoado> doacao { get; set; }
+
+        public  int qtdItensDoados { get; set; }
+
+        public string avatar { get; set; }
     }
 }

@@ -14,7 +14,6 @@ namespace WebApiEsperanca.Controllers
         {
             _ctx = context; 
         }
-
         [HttpPost]
         public IActionResult Index([FromBody] CadastroRequest request)
         {
